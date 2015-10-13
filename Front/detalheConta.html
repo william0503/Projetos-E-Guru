@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="iPay Soluções de pagamento">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        <title>iPay - Detalhe da conta</title>        
+        <link rel="stylesheet" href="css/style.css">        
+    </head>
+    <body>
+        <main>
+            <header>
+                <h1>iPay - Soluções de pagamento</h1>
+                <a href="Login.html" class="sairWeb">Sair</a>
+            </header>
+            <section id="detalheConta">
+                <article>
+                    <h2>Detalhe da conta a pagar</h2>
+                    <ul id="luz" class="detalhe">
+                        <li>Nº 123456</li>
+                        <li>Conta de luz</li>
+                        <li>Vencimento: 10/10/2015</li>
+                        <li>Valor: R$110,00</li>
+                        <li>Favorecido: Eletropaulo</li>
+                    </ul>
+                    <ul id="telefone" class="detalhe">
+                        <li>Nº 654321</li>
+                        <li>Conta de telefone</li>
+                        <li>Vencimento: 15/11/2015</li>
+                        <li>Valor: R$280,00</li>
+                        <li>Favorecido: Vivo</li>
+                    </ul>
+                    <ul id="faculdade" class="detalhe">
+                        <li>Nº 741852</li>
+                        <li>Condominio</li>
+                        <li>Vencimento: 01/12/2015</li>
+                        <li>Valor: R$540,00</li>
+                        <li>Favorecido: Faculdade</li>
+                    </ul>
+                    <ul id="condominio" class="detalhe">
+                        <li>Nº 258147</li>
+                        <li>Conta de luz</li>
+                        <li>Vencimento: 10/07/2015</li>
+                        <li>Valor: R$160,00</li>
+                        <li>Favorecido: Residencial</li>
+                    </ul>
+                </article>
+                <a href="listaContas.html">Voltar a lista</a>
+            </section>
+            <footer>
+                <a href="Login.html" class="sairMobile">Sair</a>
+                <p>Teste técnico de William da Silva Rocha para E-Guru</p>                
+            </footer>
+        </main>
+    </body>
+    <script src="scripts/jquery-1.9.1.min.js"></script>
+    <script type="application/javascript">
+        $(document).ready(function(){
+            switch($.urlParam('n')){
+                case "123456":
+                    $('#luz').css('display','block');
+                    break;
+                case "654321":
+                    $('#telefone').css('display','block');
+                    break;
+                case "741852":
+                    $('#faculdade').css('display','block');
+                    break;
+                case "258147":
+                    $('#condominio').css('display','block');
+                    break;
+            }
+        });
+        
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            return results[1] || 0;
+        }
+    </script>
+</html>

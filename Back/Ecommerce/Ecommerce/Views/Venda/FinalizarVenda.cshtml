@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Ecommerce.Models.ProdutoCarrinho>
+
+@{
+    ViewBag.Title = "Carrinho";
+}
+
+<h2>Carrinho</h2>
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Produto.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produto.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>@Html.DisplayNameFor(model => model.Subtotal)</th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto.Valor)
+                </td>
+                <td>
+                    @if (item.Quantidade > 1)
+                    {
+                        @Html.ActionLink("-", "removerQuantidade", new { id = item.Id })
+                    }
+
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+
+                    @if (item.Quantidade < item.Produto.Estoque)
+                    {
+                        @Html.ActionLink("+", "adicionarQuantidade", new { id = item.Id })
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subtotal)
+                </td>
+                <td>
+                    @Html.ActionLink("Remover item", "removerProduto", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <hr />
+    <h2>Total</h2>
+    <h3>@ViewBag.total</h3>
+
+    <hr />
+    using (Html.BeginForm("VerificarVenda", "Venda",FormMethod.Post))
+    {
+        <div>
+            <h2>Forma de pagamento</h2>
+
+            <p><strong>Boleto</strong></p>
+            @Html.RadioButton("pagamento", 0, true) Boleto
+            <p></p>
+            <p><strong>Cartão de crédito</strong></p>
+            @Html.RadioButton("pagamento", 1) Visa
+            <p></p>
+            @Html.RadioButton("pagamento", 2) Mastercard
+
+        </div>
+        <hr />
+        <div>
+            <button type="submit" id="finalizar" class="btn-primary" value="Finalizar">Finalizar</button>
+        </div>
+    }
+}
+else
+{
+    @Html.Label("Nenhum produto no carrinho")
+}
+<p></p>
+@Html.ActionLink("Voltar para Produtos", "verProdutos")

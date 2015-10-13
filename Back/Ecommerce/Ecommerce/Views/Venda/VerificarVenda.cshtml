@@ -1,0 +1,56 @@
+﻿@model Ecommerce.Models.Venda
+
+@{
+    ViewBag.Title = "Confirmar pedido";
+}
+
+<h2>Confirmar pedido</h2>
+<p></p>
+<div>
+
+    <h3>Deseja confirmar o pedido?</h3>
+    <hr />
+    @foreach (var item in Model.Carrinho.Produtos)
+    {
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(modelItem => item.Produto.Nome):</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Produto.Nome)</dd>
+
+            <dt>@Html.DisplayNameFor(modelItem => item.Produto.Valor):</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Produto.Valor)</dd>
+
+            <dt>@Html.DisplayNameFor(modelItem => item.Quantidade):</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Quantidade)</dd>
+
+            <dt>@Html.DisplayNameFor(modelItem => item.Subtotal):</dt>
+            <dd>@Html.DisplayFor(modelItem => item.Subtotal)</dd>
+
+        </dl>
+        <hr />
+    }
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pagamento):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pagamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Total):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+    </dl>
+</div>
+@using (Html.BeginForm("ConfirmarVenda", "Venda", new { pagamento = Model.Pagamento }, FormMethod.Post))
+{
+    <div>
+        <button type="submit" id="Confirmar" class="btn-primary" value="Finalizar">Confirmar</button>
+    </div>
+}
+<p></p>
+@Html.ActionLink("Voltar para o carrinho", "verCarrinho","Produto")
