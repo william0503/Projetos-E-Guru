@@ -1,0 +1,2 @@
+Informações:
+Por favor, antes de executar o projeto, execute o arquivo Database Script.sql para criar a base de dados e as tabelas necessárias.
